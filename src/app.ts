@@ -1,5 +1,12 @@
-import express, { Application, Request, Response, urlencoded } from 'express'
 import cors from 'cors'
+import express, {
+  Application,
+  NextFunction,
+  Request,
+  Response,
+  urlencoded,
+} from 'express'
+import golbalErrorHandler from './app/middleware/globalErrorHandelar'
 import router from './app/moules/users/users.route'
 
 const app: Application = express()
@@ -12,8 +19,10 @@ app.use(urlencoded({ extended: true }))
 // Application routes
 app.use('/api/v1/users', router)
 
-app.get('/', async (req: Request, res: Response) => {
-  res.send('Hello World!')
+app.get('/', (req: Request, res: Response, next: NextFunction) => {
+  next('Oree baba error')
 })
+
+app.use(golbalErrorHandler)
 
 export default app
