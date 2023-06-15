@@ -7,7 +7,7 @@ import express, {
   urlencoded,
 } from 'express'
 import golbalErrorHandler from './app/middleware/globalErrorHandelar'
-import router from './app/moules/users/users.route'
+import router from './app/moules/users/user.route'
 
 const app: Application = express()
 

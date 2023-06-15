@@ -1,4 +1,4 @@
-export type genericErrorMessage = {
+export type IgenericErrorMessage = {
   path: string
   message: string
 }
