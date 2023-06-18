@@ -7,7 +7,7 @@ import express, {
   urlencoded,
 } from 'express'
 import golbalErrorHandler from './app/middleware/globalErrorHandelar'
-import router from './app/moules/users/user.route'
+import { userRotues } from './app/moules/users/user.route'
 
 const app: Application = express()
 
@@ -17,10 +17,16 @@ app.use(express.json())
 app.use(urlencoded({ extended: true }))
 
 // Application routes
-app.use('/api/v1/users', router)
+app.use('/api/v1/', userRotues)
 
-app.get('/', (req: Request, res: Response, next: NextFunction) => {
-  next('Oree baba error')
+app.get('/', async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    res.status(200).json({
+      messasge: `successfully root api hitting`,
+    })
+  } catch (error) {
+    next(error)
+  }
 })
 
 app.use(golbalErrorHandler)

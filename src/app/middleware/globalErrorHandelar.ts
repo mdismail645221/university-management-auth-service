@@ -1,13 +1,21 @@
-import { ErrorRequestHandler } from 'express'
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-console */
+import { ErrorRequestHandler, NextFunction, Request, Response } from 'express'
 import config from '../../config'
 import ApiError from '../../errors/ApiErrors'
 import handleValidationError from '../../errors/handleValidationError'
 import { IgenericErrorMessage } from '../../interfaces/errors'
+import { errorLogger } from '../../shared/logger'
 
-const golbalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
-  res.status(400).json({
-    error: error,
-  })
+const golbalErrorHandler: ErrorRequestHandler = (
+  error,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  config.env === 'development'
+    ? console.log('globalError', error)
+    : errorLogger.error('globalError', error)
 
   let statusCode = 500
   let message = `Something Went Wrong`
