@@ -1,11 +1,13 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-console */
-import { ErrorRequestHandler, NextFunction, Request, Response } from 'express'
-import config from '../../config'
-import ApiError from '../../errors/ApiErrors'
-import handleValidationError from '../../errors/handleValidationError'
-import { IgenericErrorMessage } from '../../interfaces/errors'
-import { errorLogger } from '../../shared/logger'
+import { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
+import { ZodError } from 'zod';
+import config from '../../config';
+import ApiError from '../../errors/ApiErrors';
+import handleValidationError from '../../errors/handleValidationError';
+import handleZodError from '../../errors/handleZodError';
+import { IgenericErrorMessage } from '../../interfaces/errors';
+import { errorLogger } from '../../shared/logger';
 
 const golbalErrorHandler: ErrorRequestHandler = (
   error,
@@ -15,20 +17,25 @@ const golbalErrorHandler: ErrorRequestHandler = (
 ) => {
   config.env === 'development'
     ? console.log('globalError', error)
-    : errorLogger.error('globalError', error)
+    : errorLogger.error('globalError', error);
 
-  let statusCode = 500
-  let message = `Something Went Wrong`
-  let errorMessages: IgenericErrorMessage[] = []
+  let statusCode = 500;
+  let message = `Something Went Wrong`;
+  let errorMessages: IgenericErrorMessage[] = [];
 
   if (error?.name === 'ValidationError') {
-    const simplifiedError = handleValidationError(error)
-    statusCode = simplifiedError.statusCode
-    message = simplifiedError.message
-    errorMessages = simplifiedError.errorMessage
+    const simplifiedError = handleValidationError(error);
+    statusCode = simplifiedError.statusCode;
+    message = simplifiedError.message;
+    errorMessages = simplifiedError.errorMessage;
+  } else if (error instanceof ZodError) {
+    const simplifiedError = handleZodError(error);
+    statusCode = simplifiedError.statusCode;
+    message = simplifiedError.message;
+    errorMessages = simplifiedError.errorMessage;
   } else if (error instanceof ApiError) {
-    statusCode = error?.statusCode
-    message = error.message
+    statusCode = error?.statusCode;
+    message = error.message;
     errorMessages = error?.message
       ? [
           {
@@ -36,9 +43,9 @@ const golbalErrorHandler: ErrorRequestHandler = (
             message: error?.message,
           },
         ]
-      : []
+      : [];
   } else if (error instanceof Error) {
-    message = error?.message
+    message = error?.message;
     errorMessages = error?.message
       ? [
           {
@@ -46,7 +53,7 @@ const golbalErrorHandler: ErrorRequestHandler = (
             message: error?.message,
           },
         ]
-      : []
+      : [];
   }
 
   res.status(statusCode).json({
@@ -54,9 +61,9 @@ const golbalErrorHandler: ErrorRequestHandler = (
     message,
     errorMessages,
     stack: config?.env !== 'production' ? error?.stack : undefined,
-  })
+  });
 
-  next()
-}
+  next();
+};
 
-export default golbalErrorHandler
+export default golbalErrorHandler;
