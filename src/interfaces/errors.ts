@@ -1,4 +1,4 @@
 export type IgenericErrorMessage = {
-  path: string
-  message: string
-}
+  path: string | number;
+  message: string;
+};
