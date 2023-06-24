@@ -1,21 +1,23 @@
-// import { RequestHandler } from 'express';
-// import { UserService } from './user.services';
+import { RequestHandler } from 'express';
+import { AcademicSemisterService } from './academicSemister.service';
 
-// const academicSemister: RequestHandler = async (req, res, next) => {
-//   try {
-//     const { users } = req.body;
-//     const result = await UserService.createUsers(users);
+const CreateAcademicSemister: RequestHandler = async (req, res, next) => {
+  try {
+    const { ...academicSemisterData } = req.body;
+    const result = await AcademicSemisterService.createAcademicSemister(
+      academicSemisterData
+    );
 
-//     res.status(200).json({
-//       success: true,
-//       message: `Successfully create user`,
-//       data: result,
-//     });
-//   } catch (error) {
-//     next(error);
-//   }
-// };
+    res.status(200).json({
+      success: true,
+      message: `Successfully created academicSemister Data`,
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
-// export const academicSemisterControllers = {
-//     academicSemister,
-// };
+export const academicSemisterControllers = {
+  CreateAcademicSemister,
+};
