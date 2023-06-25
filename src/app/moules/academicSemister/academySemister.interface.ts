@@ -12,7 +12,7 @@ export type IAcademicSemisterMonths =
   | 'October'
   | 'November'
   | 'December';
-export type IAcademicSemisterTitles = `Autumn` | `Summar` | `Fall`;
+export type IAcademicSemisterTitles = `Autumn` | `Summer` | `Fall`;
 export type IAcademicSemisterCodes = `01` | `02` | `03`;
 
 export type IacademySemister = {

@@ -7,6 +7,7 @@ import express, {
   urlencoded,
 } from 'express';
 import golbalErrorHandler from './app/middleware/globalErrorHandelar';
+import { academicSemisterRotues } from './app/moules/academicSemister/academicSemister.route';
 import { userRotues } from './app/moules/user/user.route';
 
 const app: Application = express();
@@ -17,7 +18,8 @@ app.use(express.json());
 app.use(urlencoded({ extended: true }));
 
 // Application routes
-app.use('/api/v1/', userRotues);
+app.use('/api/v1/user', userRotues);
+app.use('/api/v1/academicSemester', academicSemisterRotues);
 
 app.get('/', async (req: Request, res: Response, next: NextFunction) => {
   try {

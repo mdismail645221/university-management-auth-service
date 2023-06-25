@@ -6,11 +6,11 @@ import { academicSemisterValidationZod } from './academicSemister.validation';
 const router = express.Router();
 
 router.post(
-  '/academic-semister',
+  '/create-semester',
   validationRequest(
     academicSemisterValidationZod.createAcademicSemisterZodSchema
   ),
   academicSemisterControllers.CreateAcademicSemister
 );
 
-export const userRotues = router;
+export const academicSemisterRotues = router;
