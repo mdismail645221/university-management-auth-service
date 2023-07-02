@@ -1,0 +1,12 @@
+{
+  statusCode: 409,
+  level: 'error',
+  label: 'UNIVERSITY MANAGEMENT APPLICATIONS LOGGER',
+  timestamp: '2023-07-01T16:21:18.215Z'
+}
+{
+  statusCode: 409,
+  level: 'error',
+  label: 'UNIVERSITY MANAGEMENT APPLICATIONS LOGGER',
+  timestamp: '2023-07-01T16:24:51.168Z'
+}

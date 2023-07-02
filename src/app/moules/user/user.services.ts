@@ -5,9 +5,6 @@ import { User } from './user.model';
 import { generatorUserId } from './user.utils';
 
 const createUsers = async (user: IUser): Promise<IUser | null> => {
-  // auto generator Id
-  // custom student password
-
   const id = await generatorUserId();
 
   user.id = id;

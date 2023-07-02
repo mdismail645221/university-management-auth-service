@@ -8,12 +8,18 @@ const createAcademicSemister = async (
   payload: IacademySemister
 ): Promise<IacademySemister> => {
   if (academicSemesterTitleCodeMapper[payload.title] !== payload.code) {
-    throw new ApiError(status.BAD_REQUEST, 'Invalid semester codes');
+    throw new ApiError(
+      status.BAD_REQUEST,
+      `Invalid semester codes ${payload.code}`
+    );
   }
   const result = await AcademicSemister.create(payload);
   return result;
 };
 
+// const getAllSemesters = async (paginationOptions: IPaginationOptions) => {};
+
 export const AcademicSemisterService = {
   createAcademicSemister,
+  // getAllSemesters,
 };

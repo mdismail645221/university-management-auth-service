@@ -6,9 +6,9 @@ import express, {
   Response,
   urlencoded,
 } from 'express';
+import httpStatus from 'http-status';
 import golbalErrorHandler from './app/middleware/globalErrorHandelar';
-import { academicSemisterRotues } from './app/moules/academicSemister/academicSemister.route';
-import { userRotues } from './app/moules/user/user.route';
+import router from './app/routes';
 
 const app: Application = express();
 
@@ -17,9 +17,7 @@ app.use(cors());
 app.use(express.json());
 app.use(urlencoded({ extended: true }));
 
-// Application routes
-app.use('/api/v1/user', userRotues);
-app.use('/api/v1/academicSemester', academicSemisterRotues);
+app.use('/api/v1', router);
 
 app.get('/', async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -31,6 +29,22 @@ app.get('/', async (req: Request, res: Response, next: NextFunction) => {
   }
 });
 
+// global error handler
 app.use(golbalErrorHandler);
+
+//not found route
+app.use((req: Request, res: Response, next: NextFunction) => {
+  res.status(httpStatus.NOT_FOUND).json({
+    success: false,
+    message: `Not found`,
+    errorMessage: [
+      {
+        path: req.originalUrl,
+        message: `API NOT FOUND `,
+      },
+    ],
+  });
+  next();
+});
 
 export default app;
