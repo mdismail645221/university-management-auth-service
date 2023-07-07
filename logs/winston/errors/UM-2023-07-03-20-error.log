@@ -1,12 +1,10 @@
 {
-  statusCode: 400,
   level: 'error',
   label: 'UNIVERSITY MANAGEMENT APPLICATIONS LOGGER',
-  timestamp: '2023-07-02T01:40:41.334Z'
+  timestamp: '2023-07-03T14:12:14.420Z'
 }
 {
-  statusCode: 400,
   level: 'error',
   label: 'UNIVERSITY MANAGEMENT APPLICATIONS LOGGER',
-  timestamp: '2023-07-02T01:56:02.514Z'
+  timestamp: '2023-07-03T14:20:57.467Z'
 }

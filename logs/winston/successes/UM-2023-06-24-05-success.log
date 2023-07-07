@@ -1,6 +1,0 @@
-{
-  message: 'Application app listening on port 5000',
-  level: 'info',
-  label: 'UNIVERSITY MANAGEMENT APPLICATIONS LOGGER',
-  timestamp: '2023-06-23T23:40:20.075Z'
-}

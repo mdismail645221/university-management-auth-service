@@ -18,7 +18,6 @@ const createUsers = async (user: IUser): Promise<IUser | null> => {
   if (!createUser) {
     throw new ApiError(400, 'Failed to create user');
   }
-
   return createUser;
 };
 
