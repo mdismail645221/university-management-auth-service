@@ -1,6 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
+import { paginationsFields } from '../../../constants/paginations';
 import catchAsync from '../../../shared/catchAsync';
+import pick from '../../../shared/pick';
 import sendResponse from '../../../shared/sendResponse';
 import { AcademicSemisterService } from './academicSemister.service';
 import { IAcademySemister } from './academySemister.interface';
@@ -22,52 +24,26 @@ const createSemester = catchAsync(
   }
 );
 
-// const CreateAcademicSemister: RequestHandler = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   try {
-//     const { ...academicSemisterData } = req.body;
-//     // console.log(academicSemisterData);
-//     const result = await AcademicSemisterService.createAcademicSemister(
-//       academicSemisterData
-//     );
-//     res.status(200).json({
-//       statusCode: 400,
-//       success: true,
-//       message: `successfully created user`,
-//       data: result,
-//     });
-//   } catch (error) {
-//     next();
-//   }
-// };
+const getAllSemester = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const paginationOptions = pick(req.query, paginationsFields);
 
-// const getAllSemester = catchAsync(
-//   async (req: Request, res: Response, next: NextFunction) => {
-//     const paginationOptions = {
-//       page: Number(req.query.page),
-//       limit: Number(req.query.limit),
-//       sortBy: req.query.sortBy,
-//       sortOrder: req.query.sortOrder,
-//     };
+    const result = await AcademicSemisterService.getAllSemesters(
+      paginationOptions
+    );
 
-//     const result = await AcademicSemisterService.getAllSemesters(
-//       paginationOptions
-//     );
-
-//     sendResponse(res, {
-//       statusCode: httpStatus.OK,
-//       success: true,
-//       message: `Successfully geting academic semester`,
-//       data: result,
-//     });
-//     next();
-//   }
-// );
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'getAllSemester get retirived successfully',
+      meta: result.meta,
+      data: result.data,
+    });
+    next();
+  }
+);
 
 export const academicSemisterControllers = {
   createSemester,
-  //   getAllSemester,
+  getAllSemester,
 };

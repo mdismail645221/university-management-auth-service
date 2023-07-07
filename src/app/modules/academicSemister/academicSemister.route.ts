@@ -13,6 +13,6 @@ router.post(
   academicSemisterControllers.createSemester
 );
 
-// router.get('/aaaa', academicSemisterControllers.getAllSemester);
+router.get('/getAllSemester', academicSemisterControllers.getAllSemester);
 
 export const academicSemisterRotues = router;
