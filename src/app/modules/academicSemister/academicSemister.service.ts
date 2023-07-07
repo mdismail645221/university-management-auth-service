@@ -1,15 +1,15 @@
-import status from 'http-status';
+import httpStatus from 'http-status';
 import ApiError from '../../../errors/ApiErrors';
 import { academicSemesterTitleCodeMapper } from './academicSemister.constant';
-import { IacademySemister } from './academySemister.interface';
+import { IAcademySemister } from './academySemister.interface';
 import { AcademicSemister } from './academySemister.model';
 
 const createAcademicSemister = async (
-  payload: IacademySemister
-): Promise<IacademySemister> => {
+  payload: IAcademySemister
+): Promise<IAcademySemister> => {
   if (academicSemesterTitleCodeMapper[payload.title] !== payload.code) {
     throw new ApiError(
-      status.BAD_REQUEST,
+      httpStatus.BAD_REQUEST,
       `Invalid semester codes ${payload.code}`
     );
   }

@@ -15,15 +15,12 @@ export type IAcademicSemisterMonths =
 export type IAcademicSemisterTitles = `Autumn` | `Summer` | `Fall`;
 export type IAcademicSemisterCodes = `01` | `02` | `03`;
 
-export type IacademySemister = {
+export type IAcademySemister = {
   title: IAcademicSemisterTitles;
-  year: number;
+  year: string;
   code: IAcademicSemisterCodes;
   startMonth: IAcademicSemisterMonths;
   endMonth: IAcademicSemisterMonths;
 };
 
-export type AcademicSemisterModel = Model<
-  IacademySemister,
-  Record<string, unknown>
->;
+export type AcademicSemisterModel = Model<IAcademySemister>;

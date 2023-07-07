@@ -1,16 +1,16 @@
 import express from 'express';
-import validationRequest from '../../middleware/validationRequest';
+import validationRequest from '../../middleware/zodValidationRequest';
 import { academicSemisterControllers } from './academicSemister.controller';
 import { academicSemisterValidationZod } from './academicSemister.validation';
 
 const router = express.Router();
 
 router.post(
-  '/create-semester',
+  '/createdSemester',
   validationRequest(
     academicSemisterValidationZod.createAcademicSemisterZodSchema
   ),
-  academicSemisterControllers.CreateAcademicSemister
+  academicSemisterControllers.createSemester
 );
 
 // router.get('/aaaa', academicSemisterControllers.getAllSemester);

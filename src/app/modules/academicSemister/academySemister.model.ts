@@ -8,10 +8,10 @@ import {
 } from './academicSemister.constant';
 import {
   AcademicSemisterModel,
-  IacademySemister,
+  IAcademySemister,
 } from './academySemister.interface';
 
-export const academicSemisterSchema = new Schema<IacademySemister>(
+export const academicSemisterSchema = new Schema<IAcademySemister>(
   {
     title: {
       type: String,
@@ -19,7 +19,7 @@ export const academicSemisterSchema = new Schema<IacademySemister>(
       enum: academicSemisterTitles,
     },
     year: {
-      type: Number,
+      type: String,
       required: true,
     },
     code: {
@@ -54,7 +54,7 @@ academicSemisterSchema.pre('save', async function (next) {
   }
 });
 
-export const AcademicSemister = model<IacademySemister, AcademicSemisterModel>(
+export const AcademicSemister = model<IAcademySemister, AcademicSemisterModel>(
   'academicSemister',
   academicSemisterSchema
 );
