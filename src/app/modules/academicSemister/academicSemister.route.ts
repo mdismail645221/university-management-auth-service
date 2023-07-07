@@ -12,7 +12,10 @@ router.post(
   ),
   academicSemisterControllers.createSemester
 );
-
-// router.get('/aaaa', academicSemisterControllers.getAllSemester);
+router.get(
+  '/getSingleSemester/:id',
+  academicSemisterControllers.academicSingleSemester
+);
+router.get('/getAllSemester', academicSemisterControllers.getAllSemester);
 
 export const academicSemisterRotues = router;
