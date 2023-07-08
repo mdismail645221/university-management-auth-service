@@ -11,9 +11,9 @@ const createAcademicSemisterZodSchema = z.object({
       required_error: `title is required`,
       invalid_type_error: 'year must be Autumn , Summar, Fall',
     }),
-    year: z.number({
+    year: z.string({
       required_error: `Year is required`,
-      invalid_type_error: 'year must be a number',
+      invalid_type_error: 'year must be a string',
     }),
     code: z.enum([...academicSemisterCodes] as [string, ...string[]], {
       required_error: `code is required`,
@@ -30,6 +30,41 @@ const createAcademicSemisterZodSchema = z.object({
   }),
 });
 
+// both title and code should be provied or neither ---zod schema
+const UpdateAcademicSemisterZodSchema = z
+  .object({
+    body: z.object({
+      title: z
+        .enum([...academicSemisterTitles] as [string, ...string[]], {
+          required_error: `title is required`,
+        })
+        .optional(),
+      year: z.string({ required_error: `Year is required` }).optional(),
+      code: z
+        .enum([...academicSemisterCodes] as [string, ...string[]], {
+          required_error: `code is required`,
+        })
+        .optional(),
+      startMonth: z
+        .enum([...academicSemisterMonths] as [string, ...string[]], {
+          required_error: `startMonth is required`,
+        })
+        .optional(),
+      endMonth: z
+        .enum([...academicSemisterMonths] as [string, ...string[]], {
+          required_error: `endMonth is required`,
+        })
+        .optional(),
+    }),
+  })
+  .refine(
+    data => (data.body.title && data.body.code) || (!data.body.title && !data),
+    {
+      message: 'Either both title and code should be provied or neither',
+    }
+  );
+
 export const academicSemisterValidationZod = {
   createAcademicSemisterZodSchema,
+  UpdateAcademicSemisterZodSchema,
 };

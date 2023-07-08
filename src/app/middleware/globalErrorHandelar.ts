@@ -4,6 +4,7 @@ import { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
 import { ZodError } from 'zod';
 import config from '../../config';
 import ApiError from '../../errors/ApiErrors';
+import handleCastError from '../../errors/handleCastError';
 import handleValidationError from '../../errors/handleValidationError';
 import handleZodError from '../../errors/handleZodError';
 import { IgenericErrorMessage } from '../../interfaces/errors';
@@ -25,6 +26,12 @@ const golbalErrorHandler: ErrorRequestHandler = (
 
   if (error?.name === 'ValidationError') {
     const simplifiedError = handleValidationError(error);
+    statusCode = simplifiedError.statusCode;
+    message = simplifiedError.message;
+    errorMessages = simplifiedError.errorMessage;
+  } else if (error?.name === 'CastError') {
+    const simplifiedError = handleCastError(error);
+
     statusCode = simplifiedError.statusCode;
     message = simplifiedError.message;
     errorMessages = simplifiedError.errorMessage;

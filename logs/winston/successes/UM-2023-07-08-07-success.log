@@ -1,0 +1,48 @@
+{
+  message: 'Application app listening on port 5000',
+  level: 'info',
+  label: 'UNIVERSITY MANAGEMENT APPLICATIONS LOGGER',
+  timestamp: '2023-07-08T01:02:50.940Z'
+}
+{
+  message: 'Application app listening on port 5000',
+  level: 'info',
+  label: 'UNIVERSITY MANAGEMENT APPLICATIONS LOGGER',
+  timestamp: '2023-07-08T01:37:37.635Z'
+}
+{
+  message: 'Application app listening on port 5000',
+  level: 'info',
+  label: 'UNIVERSITY MANAGEMENT APPLICATIONS LOGGER',
+  timestamp: '2023-07-08T01:38:14.236Z'
+}
+{
+  message: 'Application app listening on port 5000',
+  level: 'info',
+  label: 'UNIVERSITY MANAGEMENT APPLICATIONS LOGGER',
+  timestamp: '2023-07-08T01:49:15.270Z'
+}
+{
+  message: 'Application app listening on port 5000',
+  level: 'info',
+  label: 'UNIVERSITY MANAGEMENT APPLICATIONS LOGGER',
+  timestamp: '2023-07-08T01:50:04.334Z'
+}
+{
+  message: 'Application app listening on port 5000',
+  level: 'info',
+  label: 'UNIVERSITY MANAGEMENT APPLICATIONS LOGGER',
+  timestamp: '2023-07-08T01:50:39.019Z'
+}
+{
+  message: 'Application app listening on port 5000',
+  level: 'info',
+  label: 'UNIVERSITY MANAGEMENT APPLICATIONS LOGGER',
+  timestamp: '2023-07-08T01:53:28.604Z'
+}
+{
+  message: 'Application app listening on port 5000',
+  level: 'info',
+  label: 'UNIVERSITY MANAGEMENT APPLICATIONS LOGGER',
+  timestamp: '2023-07-08T01:56:29.295Z'
+}

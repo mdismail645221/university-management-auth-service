@@ -95,13 +95,12 @@ const getAllSemesters = async (
 
   const { limit, page, skip, sortBy, sortOrder } =
     helpers.calculationPagination(paginationOptions);
-
   const sortConditions: { [key: string]: SortOrder } = {};
-
   if (sortBy && sortOrder) {
     sortConditions[sortBy] = sortOrder;
   }
 
+  //where condition.the AcademicSemister maybe andCondition recevied else {} recevied
   const whereConditions = andCondition.length > 0 ? { $and: andCondition } : {};
 
   const result = await AcademicSemister.find(whereConditions)
@@ -121,8 +120,33 @@ const getAllSemesters = async (
   };
 };
 
+// academic updated semester service function
+const academicUpdatedSemesterService = async (
+  id: string,
+  payload: Partial<IAcademySemister>
+): Promise<IAcademySemister | null> => {
+  if (
+    payload.title &&
+    payload.code &&
+    academicSemesterTitleCodeMapper[payload.title] !== payload.code
+  ) {
+    throw new ApiError(
+      httpStatus.BAD_REQUEST,
+      `Invalid semester codes ${payload.code}`
+    );
+  }
+
+  const result = await AcademicSemister.findByIdAndUpdate(
+    { _id: id },
+    payload,
+    { new: true }
+  );
+  return result;
+};
+
 export const AcademicSemisterService = {
   createAcademicSemister,
   getAllSemesters,
   getSingleSemesterService,
+  academicUpdatedSemesterService,
 };
