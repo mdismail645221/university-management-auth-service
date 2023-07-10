@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-console */
 import { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
@@ -69,8 +71,6 @@ const golbalErrorHandler: ErrorRequestHandler = (
     errorMessages,
     stack: config?.env !== 'production' ? error?.stack : undefined,
   });
-
-  next();
 };
 
 export default golbalErrorHandler;
