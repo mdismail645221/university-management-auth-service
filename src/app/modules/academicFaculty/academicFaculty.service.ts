@@ -15,7 +15,7 @@ const createdAademicFaculty = async (payload: IAcademicFaculty) => {
   return result;
 };
 
-// all data getting services funtions
+// find all data getting services funtions
 const getAllacademicFaculty = async (
   filters: IAcademicFacultyFilter,
   paginationOptions: IPaginationOptions
@@ -40,7 +40,7 @@ const getAllacademicFaculty = async (
     });
   }
 
-  // Filters needs $and to fullfill all the conditions
+  // Exact macth the fileds condtions
   if (Object.keys(filterData).length) {
     andCondition.push({
       $and: Object.entries(filterData).map(([field, value]) => ({
@@ -56,7 +56,6 @@ const getAllacademicFaculty = async (
   }
 
   const whereConditions = andCondition.length > 0 ? { $and: andCondition } : {};
-  //  andConditions.length > 0 ? { $and: andConditions } : {};
 
   const result = await AcademicFaculty.find(whereConditions)
     .sort(sortConditions)
@@ -75,7 +74,46 @@ const getAllacademicFaculty = async (
   };
 };
 
+// find single Faculty service funtion
+const findOneFaculty = async (
+  id: string
+): Promise<IAcademicFaculty | null | undefined> => {
+  const result = await AcademicFaculty.findById(id);
+  return result;
+};
+
+// update service function
+// const updateAcademicFaculty = async (
+//   id: string,
+//   payload: Partial<IAcademicFaculty>
+// ): Promise<IAcademicFaculty | null> => {
+//   console.log({ id, payload });
+//   const result = await AcademicFaculty.findOneAndUpdate({ _id: id }, payload, {
+//     new: true,
+//   });
+//   return result;
+// };
+
+const updateFaculty = async (
+  id: string,
+  payload: Partial<IAcademicFaculty>
+): Promise<IAcademicFaculty | null> => {
+  const result = await AcademicFaculty.findOneAndUpdate({ _id: id }, payload, {
+    new: true,
+  });
+  return result;
+};
+
+// delete service fucntion
+const deleteFaculty = async (id: string) => {
+  const result = await AcademicFaculty.findByIdAndDelete(id);
+  return result;
+};
+
 export const academicFacultyServices = {
   getAllacademicFaculty,
+  findOneFaculty,
   createdAademicFaculty,
+  updateFaculty,
+  deleteFaculty,
 };
